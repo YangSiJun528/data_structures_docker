@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration name="Binary_Search_Tree_Q1_F_BST" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="data_structures_docker" TARGET_NAME="Binary_Search_Tree_Q1_F_BST" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="data_structures_docker" RUN_TARGET_NAME="Binary_Search_Tree_Q1_F_BST">
+    <method v="2">
+      <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+    </method>
+  </configuration>
+</component>

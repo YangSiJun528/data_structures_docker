@@ -50,6 +50,13 @@ JetBrains 문서 기준으로, CLion은 `.devcontainer/devcontainer.json`이 있
 - `Data-Structures` 아래의 각 `.c` 파일이 CMake 실행 타깃으로 자동 생성됩니다.
 - CLion 오른쪽 상단 실행 구성에서 원하는 타깃을 선택한 뒤 실행하거나 디버깅하면 됩니다.
 - 디버깅은 컨테이너 안의 `gdb`를 사용합니다.
+- 각 문제 파일은 `main`을 포함한 **독립 실행 파일**로 취급합니다. 여러 `.c` 파일을 하나의 실행 파일로 합치지 않습니다.
+
+실행할 때는 CLion의 **`CMake Application` 타깃**을 사용하세요.
+
+- `.idea/runConfigurations/`에는 공유용 CMake 실행 구성이 포함되어 있습니다.
+- `Current File` 또는 `C/C++ File` 실행은 현재 파일을 직접 컴파일하므로 사용하지 않는 편이 좋습니다.
+- CMake 타깃으로 실행하면 바이너리는 `cmake-build-*/bin` 아래에 생성됩니다.
 
 기존 `.vscode` 설정과의 대응 관계는 아래와 같습니다.
 
