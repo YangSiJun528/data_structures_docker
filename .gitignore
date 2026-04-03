@@ -81,13 +81,13 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 ### JetBrains+all Patch ###
-# Ignore everything but code style settings and run configurations
-# that are supposed to be shared within teams.
+# Ignore everything under .idea by default.
+# In this repository, CLion run configurations are environment-specific
+# and should be regenerated inside the current dev container backend.
 
 .idea/*
 
 !.idea/codeStyles
-!.idea/runConfigurations
 
 ### Linux ###
 *~

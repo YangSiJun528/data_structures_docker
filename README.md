@@ -54,9 +54,14 @@ JetBrains 문서 기준으로, CLion은 `.devcontainer/devcontainer.json`이 있
 
 실행할 때는 CLion의 **`CMake Application` 타깃**을 사용하세요.
 
-- `.idea/runConfigurations/`에는 공유용 CMake 실행 구성이 포함되어 있습니다.
+- 실행 구성은 저장소에 고정하지 않습니다. CLion이 현재 dev container 백엔드에서 CMake 타깃 기준으로 다시 생성하도록 두는 것이 안전합니다.
 - `Current File` 또는 `C/C++ File` 실행은 현재 파일을 직접 컴파일하므로 사용하지 않는 편이 좋습니다.
 - CMake 타깃으로 실행하면 바이너리는 `cmake-build-*/bin` 아래에 생성됩니다.
+
+`Error: Target '... (data_structures_docker)' not found` 같은 메시지가 보이면, 예전에 저장된 실행 구성이 현재 컨테이너의 CMake 타깃과 어긋난 상태일 가능성이 큽니다.
+
+- CLion의 Run/Debug Configurations에서 기존 항목을 지우고 CMake 타깃을 다시 선택합니다.
+- 필요하면 프로젝트의 로컬 `.idea/runConfigurations`를 삭제한 뒤 CMake Reload를 실행합니다.
 
 기존 `.vscode` 설정과의 대응 관계는 아래와 같습니다.
 
