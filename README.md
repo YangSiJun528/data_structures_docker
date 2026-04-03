@@ -86,7 +86,56 @@ JetBrains 문서 기준으로, CLion은 `.devcontainer/devcontainer.json`이 있
 - `Binary_Tree_Q2_E_BT`
 - `Binary_Search_Tree_Q5_F_BST`
 
-## 6. 폴더 구조
+## 6. CMake 빌드 프로필 (CMakePresets.json)
+
+세 가지 preset이 제공됩니다.
+
+| Preset 이름 | 빌드 디렉토리 | 용도 |
+|-------------|---------------|------|
+| `debug` | `cmake-build-debug/` | 기본 디버그 빌드 |
+| `asan` | `cmake-build-debug-asan/` | AddressSanitizer + UBSan으로 메모리·정의되지 않은 동작 감지 |
+| `valgrind` | `cmake-build-debug-valgrind/` | Valgrind 전용 (sanitizer 없음, `-g -O0`) |
+
+> `asan`과 `valgrind`는 동시에 활성화할 수 없습니다.
+
+### 사용법 (컨테이너 터미널)
+
+```bash
+# ASan + UBSan 빌드
+cmake --preset asan
+cmake --build cmake-build-debug-asan
+
+# 실행 (메모리 오류 발생 시 ASAN 보고서 출력)
+./cmake-build-debug-asan/bin/Linked_List_Q1_A_LL
+
+# Valgrind 빌드
+cmake --preset valgrind
+cmake --build cmake-build-debug-valgrind
+
+# Valgrind로 실행
+valgrind --leak-check=full ./cmake-build-debug-valgrind/bin/Linked_List_Q1_A_LL
+```
+
+CLion에서는 오른쪽 상단 CMake 프로필 드롭다운에서 `asan` 또는 `valgrind`를 선택하면 됩니다.
+
+### 컴파일러 경고 옵션
+
+모든 프로필에 공통으로 적용되는 경고 플래그:
+
+| 플래그 | 설명 |
+|--------|------|
+| `-Wall -Wextra -Wpedantic` | 기본 경고 묶음 |
+| `-Wshadow` | 변수 섀도잉 |
+| `-Wformat=2` | printf/scanf 포맷 문자열 엄격 검사 |
+| `-Wnull-dereference` | null 포인터 역참조 감지 |
+| `-Wstrict-prototypes` | 함수 매개변수 타입 명시 요구 |
+| `-Wmissing-prototypes` | 프로토타입 없는 함수 정의 경고 |
+| `-Wpointer-arith` | void\* 산술 등 포인터 연산 주의 |
+| `-Wcast-align` | 정렬을 깨는 캐스트 경고 |
+| `-Wwrite-strings` | 문자열 리터럴을 `const char*`로 취급 |
+| `-Wundef` | `#if`에서 미정의 매크로 사용 경고 |
+
+## 7. 폴더 구조
 
 ```text
 data_structures_docker/
@@ -102,7 +151,7 @@ data_structures_docker/
 └── README.md
 ```
 
-## 7. 학습 순서
+## 8. 학습 순서
 
 권장 순서는 기존과 동일합니다.
 

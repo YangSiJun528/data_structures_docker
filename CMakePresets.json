@@ -1,0 +1,35 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "binaryDir": "${sourceDir}/cmake-build-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "asan",
+      "displayName": "Debug – AddressSanitizer + UBSan",
+      "binaryDir": "${sourceDir}/cmake-build-debug-asan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "ENABLE_ASAN": "ON"
+      }
+    },
+    {
+      "name": "valgrind",
+      "displayName": "Debug – Valgrind",
+      "binaryDir": "${sourceDir}/cmake-build-debug-valgrind",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "ENABLE_VALGRIND": "ON",
+        "CMAKE_C_FLAGS_DEBUG": "-g -O0"
+      }
+    }
+  ]
+}
