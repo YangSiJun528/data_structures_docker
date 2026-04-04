@@ -28,7 +28,6 @@ typedef struct _linkedlist
 
 // You should not change the prototype of this function
 void RecursiveReverse(ListNode **ptrHead);
-ListNode* _recursive(ListNode* prev, ListNode* curr);
 
 void printList(LinkedList *ll);
 void removeAllItems(LinkedList *ll);
@@ -94,28 +93,39 @@ void RecursiveReverse(ListNode **ptrHead)
 	 *  그러면 재귀로 내려가고, 현재 값을 반환하게 하기. (postorder)
 	 *  이거는 ListNode* 로 처리 가능할듯? 바깥에서 head를 알고 있으니까? tmp로 하나 만들고 쓰기.
 	 *  근데 그렇게 해도 되나? 뭐 추가하는건 안된다는 말 없긴 했는데...
+	 *  ----------------------------
+	 *  재귀함수로 만들라고 함. 즉, 외부 함수 추가 없이 재귀로 만들어야 함.
+	 *  그나마 다행이라면 핵심 로직 자체는 유지된다는거?
+	 *  근데 생각보다 어렵네, AI 도움 받았음;;
+	 *  주석으로 하나하나 설명해봐야 할 듯?
 	 */
 
-	if (*ptrHead == NULL) {
+	ListNode *first, *rest;
+
+	// 방어코드: 리스트 자체가 없을 떄를 고려해 조기 종료
+	if (ptrHead == NULL || *ptrHead == NULL)
 		return;
-	}
 
-	ListNode tmp;
-	_recursive(&tmp, *ptrHead);
-	*ptrHead = tmp.next;
-}
+	first = *ptrHead;
 
-ListNode* _recursive(ListNode* tmp, ListNode* curr) {
-	if (curr->next == NULL) {
-		tmp->next = curr;
-		curr->next = NULL;
-		return curr;
-	}
+	// base case: 노드가 1개뿐이면 이미 뒤집힌 상태이므로 종료
+	if (first->next == NULL)
+		return;
 
-	ListNode* new_prev = _recursive(tmp, curr->next);
-	new_prev->next = curr;
-	curr->next = NULL;
-	return curr;
+	// first는 현재 첫 노드, rest는 나머지 부분 리스트로 분리
+	rest = first->next;
+
+	// 나머지 부분 리스트를 먼저 재귀적으로 뒤집어졌다고 가정
+	RecursiveReverse(&rest);
+
+	// post-order에서 next가 curr(first)를 역으로 가리키게 하여 방향을 반대로 바꿈
+	ListNode* curr = first;
+	ListNode* next = curr->next;
+	next->next = curr;
+	curr->next = NULL; // 무한루프가 생기지 않게 curr의 next를 NULL로 바꿈
+
+	// 현재 부분 리스트의 head를 뒤집힌 리스트의 새 head로 갱신
+	*ptrHead = rest;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
