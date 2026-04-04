@@ -99,9 +99,24 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int countOneChildNodes(BTNode *node)
-
 {
-    /* add your code here */
+    /*
+     *  이거 그냥 알고리즘 문제 아님??
+     *  이번에도 dfs 써서 풀기 - 다른 풀이 보니까 이전 문제는 외부 함수 없이 재귀로도 가능한거 같긴 함.
+     *  지금꺼는 그냥 재귀로 풀듯 할 수 있을거 같은데
+     */
+    if (node == NULL) {
+        return 0;
+    }
+    if (node->left == NULL && node->right != NULL) {
+        return countOneChildNodes(node->left) + 1;
+    }
+    if (node->left != NULL && node->right == NULL) {
+        return countOneChildNodes(node->right) + 1;
+    }
+
+    return countOneChildNodes(node->left) + countOneChildNodes(node->right);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

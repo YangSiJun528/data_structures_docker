@@ -105,7 +105,27 @@ int main()
 
 void mirrorTree(BTNode *node)
 {
-	/* add your code here */
+	/*
+	 *  목표: 이진 트리를 원래 구조의 대칭 이미지로 수정
+	 *  제약조건: 중간 트리나 임시 트리 생성 불가
+	 *  이거는 좀 빡세보이는데, 일단 재귀 쓰긴 해야할 듯?
+	 *  방식은 다른 재귀랑 동일하게 post order에서 swap 한번 씩 하면 됨.
+	 *  자식 둘 다 있을 때만 하면 되는데, NULL 처리 안되어있어도 뭐 포인터끼리 바꾸는거면 크게 문제 안될듯?
+	 *  -------
+	 *  swap 할려면 tmp 포인터가 필요한데 포인터까진 괜찮을듯?
+	 */
+
+    if (node == NULL) {
+        return;
+    }
+
+    mirrorTree(node->left);
+    mirrorTree(node->right);
+
+    BTNode* tmp;
+    tmp = node->left;
+    node->left = node->right;
+    node->right = tmp;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

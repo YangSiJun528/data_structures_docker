@@ -102,7 +102,24 @@ int main()
 
 int hasGreatGrandchild(BTNode *node)
 {
-	/* add your code here */
+	/*
+	 * 개념 이해가 안가서 AI 도움. 증손자가 뭐고 왜 예시에서 루트인지?
+	 * 현재 노드 기준으로 자식,손자,증손자까지해서 레벨 3 (0부터 셈) 이상이면 출력하는거
+	 * main 보면 출력하는 코드임. 레벨 출력하는 2번 문제 참고해서 이번에는 재귀로 풀기
+	 * -----
+	 * 다 풀긴 했는데, 이거 줄바꿈이 어케되는겨;; main 수정해야 할거 같아서 일단 냅둠.
+	 */
+
+    if (node == NULL) {
+        return 0;
+    }
+    int ll = hasGreatGrandchild(node->left) + 1;
+    int rl = hasGreatGrandchild(node->right) + 1;
+    int level = ll < rl ? ll : rl;
+    if (level >= 3) {
+        printf("%d ", node->item);
+    }
+    return level;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

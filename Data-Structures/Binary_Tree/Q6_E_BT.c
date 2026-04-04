@@ -105,7 +105,18 @@ int main()
 
 void printSmallerValues(BTNode *node, int m)
 {
-	/* add your code here */
+	/* 어떻게 처리하나 했는데, main 보면 그냥 print하는 코드임. 출력 예시보면 pre-order */
+
+    if (node == NULL) {
+        return;
+    }
+
+    if (node->item < m) {
+        printf("%d ", node->item);
+    }
+
+    printSmallerValues(node->left, m);
+    printSmallerValues(node->right, m);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
