@@ -91,7 +91,33 @@ int main()
 
 void postOrderIterativeS1(BSTNode *root)
 {
-	 /* add your code here */
+	/*
+	* 4,5번 문제는, 그냥 순전하게 해당 풀이?를 모르는게 문제임.
+	* 파이썬 버전으로 요청하고, C언어로 바꿔서 작성하는 식으로 풀었음.
+	* TODO: 나중에 복습하기.
+	*/
+	Stack s;
+	s.top = NULL;
+	BSTNode* curr = root;
+	BSTNode* last_visited = NULL;
+
+	while (curr != NULL || !isEmpty(&s)) {
+		// left 끝까지
+		while (curr != NULL) {
+			push(&s, curr);
+			curr = curr->left;
+		}
+
+		BSTNode* peeked = peek(&s);
+
+		// peeked의 오른쪽이 존재하고 방문을 안했으면 이동
+		if (peeked->right != NULL && peeked->right != last_visited) {
+			curr = peeked->right;
+		} else { // 오른쪽이 없거나 오른쪽을 방금 처리하고 돌아온 상태면 pop 가능 - post-order
+			printf("%d ", peeked->item);
+			last_visited = pop(&s);
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

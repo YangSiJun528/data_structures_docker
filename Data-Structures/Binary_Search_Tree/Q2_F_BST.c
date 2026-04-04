@@ -90,7 +90,33 @@ int main()
 
 void inOrderTraversal(BSTNode *root)
 {
-	 /* add your code here */
+	 /*
+	  * in-order 만들기, 이번엔 Stack 써야 함.
+	  * 이것도 마찬가지로 Stack 구현은 나중에 보기
+	  * 근데 이거 스택이라 순서가 다른데, 역순으로 바꿔줘야하나;;
+	  * 그리고 스택으로 올라오는 처리를 어떻게 해주지? 일단 스킵하고 다른거부터 풀기
+	  * --------------
+	  * 피곤해서 그런건지 뭔지 그냥 순수하게 Stack으로 DFS 풀면 과정이 어떻게 되는건지 모르겠음.
+	  * 정리해둔 알고리즘 자료 좀 보기 - 모르겠어서 AI 좀 봄.
+	  * 근데 이거는 뭐... C나 자료구조 문제라기보다는 알고리즘에 가깝지 않나?
+	  * TODO: 이해 잘 안가서 나중에 복습 ㄱㄱ - 대충 그려보니까 이해는 가긴 했는데, 외운건 아님
+	  * in-order는 무조건 한쪽으로 stack에 먼저 다 넣고, pop하면서 방문처리 및 안간 쪽으로 이동하는 느낌.
+	  */
+
+	Stack s;
+	s.top = NULL;
+	BSTNode* curr = root;
+
+	while (curr != NULL || !isEmpty(&s)) {
+		while (curr != NULL) {
+			push(&s, curr);
+			curr = curr->left;
+		}
+
+		curr = pop(&s);
+		printf("%d ", curr->item);
+		curr = curr->right;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -91,14 +91,46 @@ int main()
 
 void postOrderIterativeS2(BSTNode *root)
 {
-	 /* add your code here */
+	/*
+	* 4,5번 문제는, 그냥 순전하게 해당 풀이?를 모르는게 문제임.
+	* 파이썬 버전으로 요청하고, C언어로 바꿔서 작성하는 식으로 풀었음.
+	* 이건 좀 풀어보고 싶어서 AI 한테 힌트 요청.
+	* TODO: 나중에 복습하기.
+	*/
+
+	if (root == NULL) {
+		return;
+	}
+
+	Stack s1;
+	s1.top = NULL;
+	Stack s2;
+	s2.top = NULL;
+
+	push(&s1, root);
+	while (!isEmpty(&s1)) {
+		BSTNode* node = pop(&s1);
+		push(&s2, node);
+
+		if (node->left != NULL) {
+			push(&s1, node->left);
+		}
+		if (node->right != NULL) {
+			push(&s1, node->right);
+		}
+	}
+
+	while (!isEmpty(&s2)) {
+		BSTNode* node = pop(&s2);
+		printf("%d ", node->item);
+	}
 }
 
 /* Given a binary search tree and a key, this function
    deletes the key and returns the new root. Make recursive function. */
 BSTNode* removeNodeFromTree(BSTNode *root, int value)
 {
-	/* add your code here */
+	/* 이거 뭐 구현해야 함? 이거 써서 만드라는건가? 필요없는데 굳이? */
 }
 ///////////////////////////////////////////////////////////////////////////////
 

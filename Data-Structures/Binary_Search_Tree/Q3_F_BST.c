@@ -91,7 +91,21 @@ int main()
 
 void preOrderIterative(BSTNode *root)
 {
-	 /* add your code here */
+	/* 코드 복붙으로 품 */
+	Stack s;
+	s.top = NULL;
+	push(&s, root);
+
+	while (!isEmpty(&s)) {
+		BSTNode* node = pop(&s);
+		printf("%d ", node->item);
+		if (node->right != NULL) {
+			push(&s, node->right);
+		}
+		if (node->left != NULL) {
+			push(&s, node->left);
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

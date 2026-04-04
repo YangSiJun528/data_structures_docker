@@ -94,7 +94,29 @@ int main()
 void levelOrderTraversal(BSTNode* root)
 {
 
-    /* add your code here */
+    /*
+     *  큐를 사용해서 레벨별 순회 구현하는 코드
+     *  즉, bfs 쓰라는 소리임.
+     *  TODO: 피곤해서 구현 분석이 잘 안되는데 나중에 어케만들었는지 ㄱㄱ
+     *  근데 이젠 테스트케이스도 안주네??? 알아서 하라는건가?
+     *  뭐 해봤으니까 위에서 아래로, 왼쪽에서 오른쪽으로 입력하면 됨...
+     */
+
+	Queue q;
+	q.head = NULL;
+	q.tail = NULL;
+	enqueue(&q.head, &q.tail, root);
+
+	while (!isEmpty(q.head)) {
+		BSTNode* node = dequeue(&q.head, &q.tail);
+		printf("%d ", node->item);
+		if (node->left != NULL) {
+			enqueue(&q.head, &q.tail, node->left);
+		}
+		if (node->right != NULL) {
+			enqueue(&q.head, &q.tail, node->right);
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
