@@ -102,7 +102,23 @@ int main()
 
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
-	/* add your code here */
+	/*
+	 * 비어있는 상태로 인풋이 옴. flag 전환해가면서 추가 처리하면 될 듯?
+	 * 번갈아가며 하는게 아니였네, 이러면 반복문 2개
+	 */
+
+	ListNode* curr;
+	int front = (ll->size / 2) + (ll->size % 2);
+
+	for (int i = 0; i < front; i++) {
+		curr = findNode(ll, i);
+		insertNode(resultFrontList, resultFrontList->size, curr->item);
+	}
+
+	for (int i = 0; i < ll->size-front; i++) {
+		curr = findNode(ll, i+front);
+		insertNode(resultBackList, resultBackList->size, curr->item);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

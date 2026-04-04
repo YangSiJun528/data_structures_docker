@@ -88,7 +88,45 @@ int main()
 
 int moveMaxToFront(ListNode **ptrHead)
 {
-    /* add your code here */
+    /*
+     * 반환 타입에 대한 말이 없는데... 왜 int지? 그냥 Max 값 반환한다고 생각하기
+     * 이것도 3번 문제처럼 그냥 한번 추가,삭제시키면 됨. - 아 근데 포인터 타입이 ptrHead네
+     * 기존 함수 못쓰는 문제가 있다는게 이런말이였네
+     * 그러면 그냥 쭉 읽으면서 max와 max_prev 기억해두고 끝까지 가고 나서 갈아끼우면 되는거 아닌가?
+     * 문제는 max_prev가 없는 경우? 이러면 NULL로 두고 걍 prev 연결하는 과정 건너뛰면 됨.
+     * --------------
+     * 아닌가? 2중이면 이거 배열인건가? 그건 아닌거 같은데? 왜 굳이 node가 아닌 node 포인터를 타입으로 받는거지?
+     * 구조체 포인터를 포인터로 넘겨줄라는거 같은데, 뭔가 명확하게 이해가 안가네
+     * 아 근데 맨 뒤로 보내는줄 잘못 알고 풀었네;;;
+     *
+     * 포인터가 넘 많은데... 풀긴 풀었음
+     * 2중 포인터를 쓰는 이유는 ListNode* 를 바라보는 포인터가 필요함.
+     * 왜냐면 지금 보는 head가 바뀌는게 확정이라서 새롭게 바뀐 head를 기준으로 보려면 ListNode*를 바라보는 포인터가 필요함.
+     * 안그러면 이전 head인 중간 위치부터 읽게 되기 때문에...
+     */
+
+	if (*ptrHead == NULL) {
+		return -1;
+	}
+
+	// 포인터는 초기 값 세팅
+	ListNode* head = *ptrHead;
+	ListNode* curr = head;
+	ListNode* max = curr;
+	ListNode* max_prev = NULL;
+	while (curr->next != NULL) {
+		if (curr->next->item > max->item) {
+			max = curr->next;
+			max_prev = curr;
+		}
+		curr = curr->next;
+	}
+
+	if (max_prev != NULL) {
+		max_prev->next = max->next;
+	}
+	max->next = head;
+	*ptrHead = max;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

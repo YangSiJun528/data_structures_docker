@@ -28,6 +28,7 @@ typedef struct _linkedlist
 
 // You should not change the prototype of this function
 void RecursiveReverse(ListNode **ptrHead);
+ListNode* _recursive(ListNode* prev, ListNode* curr);
 
 void printList(LinkedList *ll);
 void removeAllItems(LinkedList *ll);
@@ -87,7 +88,34 @@ int main()
 
 void RecursiveReverse(ListNode **ptrHead)
 {
-	/* add your code here */
+	/*
+	 *  스택을 써야하나?
+	 *  그냥 재귀로 풀고싶은데 중첩 함수를 제공하지 않으니까...
+	 *  그러면 재귀로 내려가고, 현재 값을 반환하게 하기. (postorder)
+	 *  이거는 ListNode* 로 처리 가능할듯? 바깥에서 head를 알고 있으니까? tmp로 하나 만들고 쓰기.
+	 *  근데 그렇게 해도 되나? 뭐 추가하는건 안된다는 말 없긴 했는데...
+	 */
+
+	if (*ptrHead == NULL) {
+		return;
+	}
+
+	ListNode tmp;
+	_recursive(&tmp, *ptrHead);
+	*ptrHead = tmp.next;
+}
+
+ListNode* _recursive(ListNode* tmp, ListNode* curr) {
+	if (curr->next == NULL) {
+		tmp->next = curr;
+		curr->next = NULL;
+		return curr;
+	}
+
+	ListNode* new_prev = _recursive(tmp, curr->next);
+	new_prev->next = curr;
+	curr->next = NULL;
+	return curr;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

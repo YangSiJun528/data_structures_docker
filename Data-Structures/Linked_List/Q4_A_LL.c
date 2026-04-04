@@ -86,7 +86,25 @@ int main()
 
 void moveEvenItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+	/*
+	 *  걍 3번문제 조건만 바꾼 복붙하면 풀리는거 아닌가?
+	 */
+
+	int end = ll->size;
+	int i = 0;
+	ListNode* cur; // 반복 선언 방지
+
+	while (i < end) {
+		cur = findNode(ll, i);
+		if (cur->item % 2 == 0) {
+			//printf("%d, %d, %d \n", cur->item, i, end);
+			insertNode(ll, ll-> size, cur->item);
+			removeNode(ll, i);
+			end--;
+		} else {
+			i++;
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

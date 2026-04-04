@@ -103,7 +103,31 @@ int main()
 
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
-    /* add your code here */
+    /*
+     *  이미 추가와 삭제 함수는 있음. 해당 기능을 사용할 계획을 세우기
+     *  ll1의 리스트의 길이를 기준으로 찾음.
+     *  근데 이러면 C언어의 포인터를 잘 활용하는건 아닌거 같지만 일단 구현하기
+     *
+     *  1. ll1의 사이즈 or ll2의 사이즈 중 작은거를 기준으로 반복
+     *  2. 새 ll_new를 만들고, 각 요소를 순회하면서 넣기. 읽은 각 요소는 제거한다.
+     *  3. 새 ll_new와 ll2을 반환한다. 정확히는 ll1의 head 주소를 ll_new의 head로 바꾼다.
+     */
+
+	int cnt_iter = (ll1->size < ll2->size) ? ll1->size : ll2->size;
+	LinkedList ll_tmp; // LinkedList 자체는 버려져도 됨.
+	ll_tmp.head = NULL;
+	ll_tmp.size = 0;
+	for (int i = 0; i < cnt_iter; i++) {
+		ListNode* ln1 = findNode(ll1, 0);
+		ListNode* ln2 = findNode(ll2, 0);
+		insertNode(&ll_tmp, ll_tmp.size, ln1->item);
+		insertNode(&ll_tmp, ll_tmp.size, ln2->item);
+		removeNode(ll1, 0);
+		removeNode(ll2, 0);
+	}
+
+	ll1->head = ll_tmp.head;
+	ll1->size = ll_tmp.size;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

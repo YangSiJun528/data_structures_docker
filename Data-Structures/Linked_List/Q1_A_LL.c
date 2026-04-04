@@ -90,7 +90,34 @@ int main()
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	/*
+	 *  1. next가 item보다 큰 값이 나올때까지 이동 + idx 값 증가 (비어있는 경우도 고려해서)
+	 *	2. 만약 추가가 불가능하면 -1 반환 (근데 중복 외에는 불가능한 경우가 없나?)
+	 *	3. 추가가 가능하면 새로운 요소를 메모리에 할당하고 인덱스 값 반환
+	 *
+	 *	결국에 인덱스 값만 무사하면 되서, node 포인터를 굳이 살릴 필요 없음.
+	 *	curr 넘기가다 curr이 null이면 맨 뒤에 추가, null이 아닌데 item랑 같으면 중복으로 실패, 같지않으면 해당 위치에 추가
+	 */
+
+   	ListNode* curr = ll->head;
+	int idx = 0;
+
+	while (curr != NULL && curr->item < item) {
+		curr = curr->next;
+		idx++;
+	}
+
+	if (curr != NULL && curr->item == item) {
+		return -1;
+	}
+
+	//printf("item: %d, idx: %d\n", item, idx);
+
+	if (insertNode(ll, idx, item) != -1) {
+		return idx;
+	}
+
+	return -1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

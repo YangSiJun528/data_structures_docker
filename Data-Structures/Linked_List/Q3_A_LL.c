@@ -86,7 +86,30 @@ int main()
 
 void moveOddItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+	/*
+	 *  그냥 순회하며 읽다가 홀수 있으면 맨 뒤에 추가하고 삭제하기 - 구체적으론 좀 어렵
+	 *  기존 함수를 사용하되 최대한 간단하게 하고 싶음.
+	 *  1. 전체 요소 번 만큼 순회하면 됨. 대신 위치는 계속 변하므로 for i의 i에 의존하지 않고 next로 이동
+	 *  2. swap을 어떻게 할 것인가? -> find 하고 next값을 서로 바꾸기 -> 근데 기본 함수 쓰려면 삭제 -> 추가가 자연스러운듯?
+	 *  3. 포인터처럼 생각하면 안되고, 그냥 idx변수로 배열 다룬다고 생각해야 단순하게 풀리는듯?
+	 */
+
+	int end = ll->size;
+	int i = 0;
+	ListNode* cur; // 반복 선언 방지
+
+	while (i < end) {
+		cur = findNode(ll, i);
+		if (cur->item % 2 != 0) {
+			//printf("%d, %d, %d \n", cur->item, i, end);
+			insertNode(ll, ll-> size, cur->item);
+			removeNode(ll, i);
+			end--;
+		} else {
+			i++;
+		}
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
