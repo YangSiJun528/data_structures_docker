@@ -104,7 +104,54 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	/*
+	 * 일단 pop() 예외처리가 되어있어서 이렇게 써도 됨.
+	 * 조건문 더러운데 뭐 좋은방법 없나? 변수로 빼거나 ASCII 크기 순으로 해서 뭐 나보다 크면 넘기기 그런 식으로?
+	 * 아니 이거 과제 코드에서 왜 true false가 반대야;; 시간날렸네
+	 * ---------
+	 * 잘 동작하는데 가끔 무한루프 찍힘. 이거는 AI한테 물어보기 - main 코드 쪽 문제라고 함.
+	 */
+
+	// 반환용 변수, 이거 일반적인 C랑 bool 기준이 반대임;;
+	int RTN_balanced = 0;
+	int RTN_not_balanced = 1;
+
+	Stack s;
+	s.ll.head = NULL;
+	s.ll.size = 0;
+	while (*expression != '\0') {
+		switch (*expression) {
+			case '{':
+				/* intentional fallthrough */
+			case '[':
+				/* intentional fallthrough */
+			case '(':
+				push(&s, *expression);
+				break;
+			case '}':
+				if (pop(&s) != '{') {
+					return RTN_not_balanced;
+				}
+				break;
+			case ']':
+				if (pop(&s) != '[') {
+					return RTN_not_balanced;
+				}
+				break;
+			case ')':
+				if (pop(&s) != '(') {
+					return RTN_not_balanced;
+				}
+				break;
+			default:
+				return RTN_not_balanced;
+		}
+		expression++;
+	}
+	if (isEmptyStack(&s)) {
+		return RTN_balanced;
+	}
+	return RTN_not_balanced;
 }
 
 ////////////////////////////////////////////////////////////

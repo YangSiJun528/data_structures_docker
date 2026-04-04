@@ -116,12 +116,26 @@ int main()
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+	ListNode* curr = ll->head;
+	while (curr != NULL) {
+		enqueue(q, curr->item);
+		curr = curr->next;
+	}
 }
 
 void removeOddValues(Queue *q)
 {
-	/* add your code here */
+	/*
+	 * 이건 자료에 없는데 코드엔 있네?
+	 * enqueue -> dequeue 반복하면 될듯.
+	 */
+
+	for (int i = 0; i < q->ll.size; i++) {
+		int popped = dequeue(q);
+		if (popped % 2 != 0) {
+			enqueue(q, popped);
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

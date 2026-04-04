@@ -112,7 +112,22 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+/*
+ *  Stack이 있는걸 보니 Stack을 써서 처리하라는거겠지? LL 7번 과제처럼 풀 수도 있긴 한데...
+ *  임시로 쓸거니까 malloc 없이 로컬영역에서 쓰기.
+ */
+	Stack s;
+	s.ll.head =NULL;
+	s.ll.size =0;
+	s.ll.tail=NULL;
+
+	while (!isEmptyQueue(q)) {
+		push(&s, dequeue(q));
+	}
+
+	while (!isEmptyStack(&s)) {
+		enqueue(q, pop(&s));
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

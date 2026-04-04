@@ -113,12 +113,27 @@ int main()
 
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
-    /* add your code here */
+	ListNode* curr = ll->head;
+	while (curr != NULL) {
+		push(s, curr->item);
+		curr = curr->next;
+	}
 }
 
 void removeEvenValues(Stack *s)
 {
-	/* add your code here */
+	/*
+	 *  순서가 유지되는걸 원하는거 같은데, 그러면 그냥 링크드리스트 기능 쓰는게 좋을듯?
+	 */
+	int i = 0;
+	while (i < s->ll.size) {
+		ListNode* curr = findNode(&s->ll, i);
+		if (curr->item % 2 != 0) {
+			removeNode(&s->ll, i);
+			i--;
+		}
+		i++;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

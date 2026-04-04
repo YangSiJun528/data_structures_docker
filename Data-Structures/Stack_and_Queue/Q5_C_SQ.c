@@ -107,9 +107,25 @@ int main()
 
 ////////////////////////////////////////////////////////////
 
-void recursiveReverse(Queue *q)
-{
-/* add your code here */
+void recursiveReverse(Queue *q) {
+	/*
+	 * LL 7번과 비슷한 문제, 이번에는 AI 없이 도전해보기
+	 * 근데 이번 문제가 더 쉬운듯? 지역변수가 스택 역햘을 함. in + enque, 호출, post + dnque
+	 */
+
+	//방어코드
+	if (q == NULL) {
+		return;
+	}
+
+	//base case
+	if (isEmptyQueue(q)) {
+		return;
+	}
+
+	int curr = dequeue(q);
+	recursiveReverse(q);
+	enqueue(q, curr);
 }
 
 //////////////////////////////////////////////////////////////////
