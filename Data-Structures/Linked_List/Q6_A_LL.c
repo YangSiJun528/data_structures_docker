@@ -103,6 +103,11 @@ int moveMaxToFront(ListNode **ptrHead)
      * 2중 포인터를 쓰는 이유는 ListNode* 를 바라보는 포인터가 필요함.
      * 왜냐면 지금 보는 head가 바뀌는게 확정이라서 새롭게 바뀐 head를 기준으로 보려면 ListNode*를 바라보는 포인터가 필요함.
      * 안그러면 이전 head인 중간 위치부터 읽게 되기 때문에...
+     *
+     * 1차 개선
+     * 9 -> 3 -> 1일 떄 무한루프 도는거 확인
+     * 맨 앞이 max일 때 max->next 설정이 항상 실행됨. 같으면 안되게 막음.
+     * return 값 정의는 과제 요구사항에 없긴 한데, 그냥 max 값 반환하게 함.
      */
 
 	if (*ptrHead == NULL) {
@@ -125,8 +130,12 @@ int moveMaxToFront(ListNode **ptrHead)
 	if (max_prev != NULL) {
 		max_prev->next = max->next;
 	}
-	max->next = head;
+	if (max != head) {
+		max->next = head;
+	}
 	*ptrHead = max;
+
+	return max->item;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

@@ -111,23 +111,22 @@ void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
      *  1. ll1의 사이즈 or ll2의 사이즈 중 작은거를 기준으로 반복
      *  2. 새 ll_new를 만들고, 각 요소를 순회하면서 넣기. 읽은 각 요소는 제거한다.
      *  3. 새 ll_new와 ll2을 반환한다. 정확히는 ll1의 head 주소를 ll_new의 head로 바꾼다.
+     *
+     *  1차 개선
+     *  마지막에 head만 갈아끼워서 처리가 깨진다는데, head바꾸고 size도 바꾸면서 해결된거 아닌가?
+     *  어차피 삭제도 다 removeNode에서 해주는데?
+     *  아 이해함. 포인터 연산이 아니니까 이러면 꼬이는구나?
+     *  그냥 더 간단하게 할 수 있을거 같아서 바꿈.
      */
 
 	int cnt_iter = (ll1->size < ll2->size) ? ll1->size : ll2->size;
-	LinkedList ll_tmp; // LinkedList 자체는 버려져도 됨.
-	ll_tmp.head = NULL;
-	ll_tmp.size = 0;
+	int idx = 1;
 	for (int i = 0; i < cnt_iter; i++) {
-		ListNode* ln1 = findNode(ll1, 0);
 		ListNode* ln2 = findNode(ll2, 0);
-		insertNode(&ll_tmp, ll_tmp.size, ln1->item);
-		insertNode(&ll_tmp, ll_tmp.size, ln2->item);
-		removeNode(ll1, 0);
+		insertNode(ll1, idx, ln2->item);
 		removeNode(ll2, 0);
+		idx += 2;
 	}
-
-	ll1->head = ll_tmp.head;
-	ll1->size = ll_tmp.size;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
