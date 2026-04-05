@@ -103,17 +103,29 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-	int prev = INT_MIN;
-	int curr = INT_MIN;
+	/*
+	 *  1차 개선
+	 *  pairwise consecutive 가 뭘 의미하는지 몰랐음. 나는 그냥 연속된거 1개인거 말하는줄?
+	 *  pairwise consecutive: 원소를 두 개씩 짝지었을 때, 각 짝의 값 차이가 1인 상태
+	 *
+	 *  그러면 홀수가 아닐 때, 2개씩 읽어가면서 값이 1 차이나는지 확인하고 결과로 반환하면 됨.
+	 */
+	int TRUE = 1;
+	int FALSE = 0;
+
+	if (s->ll.size % 2 != 0) {
+		return FALSE;
+	}
+
 	while (!isEmptyStack(s)) {
-		prev = curr;
-		curr = pop(s);
-		//printf("%d, %d \n", prev, curr);
-		if (prev == curr) {
-			return 1;
+		int fst = pop(s);
+		int snd = pop(s);
+		//printf("%d, %d \n", fst, snd);
+		if (1 != (fst > snd ? fst - snd : snd - fst)) {
+			return FALSE;
 		}
 	}
-	return 0;
+	return TRUE;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

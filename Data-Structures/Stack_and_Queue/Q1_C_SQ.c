@@ -128,11 +128,14 @@ void removeOddValues(Queue *q)
 	/*
 	 * 이건 자료에 없는데 코드엔 있네?
 	 * enqueue -> dequeue 반복하면 될듯.
+	 *
+	 * 큐는 현재 기준의 끝까지 전체 순회해야해서 초기 size 저장이 필요.
 	 */
+	int count = q->ll.size;
 
-	for (int i = 0; i < q->ll.size; i++) {
+	for (int i = 0; i < count; i++) {
 		int popped = dequeue(q);
-		if (popped % 2 != 0) {
+		if (popped % 2 == 0) {
 			enqueue(q, popped);
 		}
 	}

@@ -124,11 +124,13 @@ void removeEvenValues(Stack *s)
 {
 	/*
 	 *  순서가 유지되는걸 원하는거 같은데, 그러면 그냥 링크드리스트 기능 쓰는게 좋을듯?
+	 *
+	 *  스택 특성 처리해야 할 사이즈와 인덱스가 계속 바뀌므로 i를 다루는게 더 직관적임.,
 	 */
 	int i = 0;
 	while (i < s->ll.size) {
 		ListNode* curr = findNode(&s->ll, i);
-		if (curr->item % 2 != 0) {
+		if (curr->item % 2 == 0) {
 			removeNode(&s->ll, i);
 			i--;
 		}
