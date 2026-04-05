@@ -91,6 +91,10 @@ int main()
 
 void preOrderIterative(BSTNode *root)
 {
+	if (root == NULL) {
+		return;
+	}
+
 	/* 코드 복붙으로 품 */
 	Stack s;
 	s.top = NULL;

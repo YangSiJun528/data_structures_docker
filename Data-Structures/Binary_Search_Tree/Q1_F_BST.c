@@ -102,6 +102,10 @@ void levelOrderTraversal(BSTNode* root)
      *  뭐 해봤으니까 위에서 아래로, 왼쪽에서 오른쪽으로 입력하면 됨...
      */
 
+	if (root == NULL) {
+		return;
+	}
+
 	Queue q;
 	q.head = NULL;
 	q.tail = NULL;
