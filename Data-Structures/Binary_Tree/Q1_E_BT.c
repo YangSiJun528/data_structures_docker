@@ -121,45 +121,32 @@ int identical(BTNode *tree1, BTNode *tree2)
     *  트리는 자체적으로 재귀적임.
     *  pre-order에서 체크하고, 올라오면서 결과 다 확인해서 and 조건으로 올리면 될 듯?
     *  성공 실패 조건이 C와 다른 경우가 있었어서 변수로 명시적으로 설명
+    *
+    *  1차 개선
+    *  피드백 받은데로 조건을 더 명확하게 구상 후 쓰기
+    *  - `base case`: 둘 중 하나라도 NULL인 경우 - 둘 다 같으면 True, 아니면 False
+    *  - `left/right recursive call` - 두 요소가 다르면 Fasle
+    *  - `current node에서 결과 결합` - 두 값이 모두 True면 True
     */
     const int NO_IDENTICAL = 0;
     const int IDENTICAL = 1;
 
-    // 방어코드: tree가 아닌 경우
-    if (tree1 == NULL || tree2 == NULL) {
+    int is_all_null = tree1 == NULL && tree2 == NULL;
+    int is_once_null = !is_all_null && (tree1 == NULL || tree2 == NULL);
+
+    if (is_once_null) {
         return NO_IDENTICAL;
     }
 
-    //basecase1: 서로 일치하지 않는 경우
+    if (is_all_null) {
+        return IDENTICAL;
+    }
+
     if (tree1->item != tree2->item) {
         return NO_IDENTICAL;
     }
 
-    int is_identical = IDENTICAL;
-
-    //basecase2: left가 한 쪽만 있거나 자식 중 다른 값이 있는 경우
-    int is_all_left = tree1->left != NULL && tree2->left != NULL;
-    int is_once_left = tree1->left != NULL || tree2->left != NULL;
-    if (is_all_left && !is_once_left) {
-        is_identical = identical(tree1->left, tree2->left);
-    }
-
-    if (is_identical == NO_IDENTICAL) {
-        return NO_IDENTICAL;
-    }
-
-    //basecase3: right가 한 쪽만 있거나 자식 중 다른 값이 있는 경우
-    int is_all_right = tree1->right != NULL && tree2->right != NULL;
-    int is_once_right = tree1->right != NULL || tree2->right != NULL;
-    if (is_all_right && !is_once_right) {
-        is_identical = identical(tree1->right, tree2->right);
-    }
-
-    if (is_identical == NO_IDENTICAL) {
-        return NO_IDENTICAL;
-    }
-
-    return IDENTICAL;
+    return identical(tree1->left, tree2->left) && identical(tree1->right, tree2->right);
 }
 
 /////////////////////////////////////////////////////////////////////////////////

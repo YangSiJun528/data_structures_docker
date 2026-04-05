@@ -100,7 +100,7 @@ int dfs(BTNode *node, int level) {
     }
     int ll = dfs(node->left, level+1);
     int rl = dfs(node->right, level+1);
-    return ll < rl ? ll : rl;
+    return ll > rl ? ll : rl;
 }
 
 int maxHeight(BTNode *node)
@@ -111,6 +111,9 @@ int maxHeight(BTNode *node)
      * 근데 보니까 완전 stack으로 구현된 완전이진트리 구조를 가지는 듯 함.
      * 그러면 그냥 right로 쭉 가서 세면 되는데, 주위 코드 뒤져보기. - 아님. 걍 node로 l,r 직접 작성해야 함.
      * stack 쓸까 했는데, stack이 BTNode를 쓰네...? 이러면 딴거써야 하나?? 걍 귀찮으니까 재귀 씀.
+     *
+    *  1차 개선
+    *  이건 그냥 조건문 문제라... 큰 값을 반환하게 변경
      */
     return dfs(node, 0);
 }

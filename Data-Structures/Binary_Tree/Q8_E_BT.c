@@ -115,7 +115,7 @@ int hasGreatGrandchild(BTNode *node)
     }
     int ll = hasGreatGrandchild(node->left) + 1;
     int rl = hasGreatGrandchild(node->right) + 1;
-    int level = ll < rl ? ll : rl;
+    int level = ll > rl ? ll : rl;
     if (level >= 3) {
         printf("%d ", node->item);
     }
