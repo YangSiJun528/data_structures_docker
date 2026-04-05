@@ -229,6 +229,6 @@
 
 ## 요약
 - `Pass`: Q1_A_LL, Q3_A_LL, Q4_A_LL, Q7_A_LL, Q2_C_SQ, Q3_C_SQ, Q4_C_SQ, Q5_C_SQ, Q6_C_SQ, Q4_E_BT, Q5_E_BT, Q6_E_BT, Q7_E_BT, Q2_F_BST, Q4_F_BST, Q5_F_BST
-- `Warn`: Q5_A_LL, Q1_C_SQ, Q7_C_SQ, Q1_F_BST, Q3_F_BST
-- `Fail`: Q2_A_LL, Q6_A_LL, Q1_E_BT, Q2_E_BT, Q3_E_BT, Q8_E_BT
+- `Warn`: Q5_A_LL, ~~Q1_C_SQ~~, Q7_C_SQ, Q1_F_BST, Q3_F_BST
+- `Fail`: Q2_A_LL, Q6_A_LL, ~~Q1_E_BT~~, ~~Q2_E_BT~~, ~~Q3_E_BT~~, Q8_E_BT
 - 1차 결론: Stack and Queue 1~3은 다시 보면 Q1만 핵심 로직 수정이 더 필요하고, Q2와 Q3는 현재 해석 기준에서 통과권이다. 여전히 큰 우선순위는 `Binary_Tree` 계열의 재귀 로직과 Linked List 일부 포인터 갱신 문제다.
